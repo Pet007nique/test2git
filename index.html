@@ -13,7 +13,7 @@
         <input type="submit" value="Отправить">
     </form>
 
-    <h2>текст из  рекдактора </h2>
+    <h2>Текст из редактора:</h2>
     <div id="comments"></div>
 
     <script>
@@ -23,7 +23,14 @@
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             const comment = document.getElementById('comment').value;
-            commentsDiv.innerHTML += <p>${comment}</p>;
+            // Создаем новый элемент p для комментария
+            const newComment = document.createElement('p');
+            // Используем текстовое содержимое, чтобы избежать XSS
+            newComment.textContent = comment;
+            // Добавляем комментарий в div
+            commentsDiv.appendChild(newComment);
+            // Очищаем поле ввода
+            form.reset();
         });
     </script>
 </body>
