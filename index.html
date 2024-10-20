@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестовая страница</title>
+</head>
+<body>
+    <h1>Тестовая страница для XSS</h1>
+    <form action="" method="post">
+        <label for="comment">Ваш комментарий:</label><br>
+        <input type="text" id="comment" name="comment"><br><br>
+        <input type="submit" value="Отправить">
+    </form>
+
+    <h2>Комментарии:</h2>
+    <div id="comments"></div>
+
+    <script>
+        const form = document.querySelector('form');
+        const commentsDiv = document.getElementById('comments');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const comment = document.getElementById('comment').value;
+            commentsDiv.innerHTML += <p>${comment}</p>;
+        });
+    </script>
+</body>
+</html>
