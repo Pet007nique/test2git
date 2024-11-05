@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Тестовая страница для XSS-2</h1>
-    <form action="" method="post">
+    <form action="" method="GET">
         <label for="comment">Ваш комментарий:</label><br>
         <input type="text" id="comment" name="comment"><br><br>
         <input type="submit" value="Отправить">
@@ -17,17 +17,12 @@
     <div id="comments"></div>
 
     <script>
-        const form = document.querySelector('form');
-        const commentsDiv = document.getElementById('comments');
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const comment = document.getElementById('comment').value;
-            // Вставляем комментарий без защиты от XSS
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('comment')) {
+            const commentsDiv = document.getElementById('comments');
+            const comment = params.get('comment');
             commentsDiv.innerHTML += `<p>${comment}</p>`;
-            // Очищаем поле ввода
-            form.reset();
-        });
+        }
     </script>
 </body>
 </html>
