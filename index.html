@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тестовая страница</title>
+    <title>Тестовая страница для XSS</title>
 </head>
 <body>
-    <h1>Тестовая страница для XSS-2</h1>
+    <h1>Тестовая страница для XSS-атак</h1>
     <form action="" method="GET">
         <label for="comment">Ваш комментарий:</label><br>
         <input type="text" id="comment" name="comment"><br><br>
@@ -21,9 +21,8 @@
         if (params.has('comment')) {
             const commentsDiv = document.getElementById('comments');
             const comment = params.get('comment');
-            // Декодируем закодированный текст
-            const decodedComment = decodeURIComponent(comment.replace(/\+/g, ' '));
-            commentsDiv.innerHTML += `<p>${decodedComment}</p>`;
+            // Вставляем комментарий как HTML, чтобы скрипты выполнялись
+            commentsDiv.innerHTML += `<p>${comment}</p>`;
         }
     </script>
 </body>
