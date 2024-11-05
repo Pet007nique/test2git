@@ -23,12 +23,8 @@
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             const comment = document.getElementById('comment').value;
-            // Создаем новый элемент p для комментария
-            const newComment = document.createElement('p');
-            // Используем текстовое содержимое, чтобы избежать XSS
-            newComment.textContent = comment;
-            // Добавляем комментарий в div
-            commentsDiv.appendChild(newComment);
+            // Вставляем комментарий без защиты от XSS
+            commentsDiv.innerHTML += `<p>${comment}</p>`;
             // Очищаем поле ввода
             form.reset();
         });
