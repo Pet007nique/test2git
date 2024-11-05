@@ -21,7 +21,9 @@
         if (params.has('comment')) {
             const commentsDiv = document.getElementById('comments');
             const comment = params.get('comment');
-            commentsDiv.innerHTML += `<p>${comment}</p>`;
+            // Декодируем закодированный текст
+            const decodedComment = decodeURIComponent(comment.replace(/\+/g, ' '));
+            commentsDiv.innerHTML += `<p>${decodedComment}</p>`;
         }
     </script>
 </body>
